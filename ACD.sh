@@ -37,6 +37,7 @@ ENCFSXML='/home/plex/encfs.xml'
 
 if [ "$1" == "Start" ]; then
 echo "Start routine selected..." >> $PWD/logs/ACDControl-$(date '+%F').log
+rm -f /home/plex/.cache/acd_cli/nodes.db
 acdcli old-sync >> $PWD/logs/ACDControl-$(date '+%F').log
 acdcli mount $ACDENCRYPTED --allow-other
         if mountpoint -q $ACDENCRYPTED; then
@@ -85,6 +86,7 @@ else
                         acdcli umount
                         sleep 3
 
+                        rm -f /home/plex/.cache/acd_cli/nodes.db
                         acdcli old-sync >> $PWD/logs/ACDControl-$(date '+%F').log
 
                         sleep 5
@@ -118,8 +120,8 @@ else
                 else
                         if [ "$1" == "Sync" ]; then
                                         echo "Sync routine selected..." >> $PWD/logs/ACDControl-$(date '+%F').log
-                                        echo "Clear cache..." >> $PWD/logs/ACDControl-$(date '+%F').log
-                                acdcli cc
+                                        echo "Removing nodes.db..." >> $PWD/logs/ACDControl-$(date '+%F').log
+                                rm -f /home/plex/.cache/acd_cli/nodes.db
                                 acdcli old-sync >> $PWD/logs/ACDControl-$(date '+%F').log
                                 acdcli ul -x 2 -r 5 /home/plex/.local-sorted/* / >> $PWD/logs/ACDControl-$(date '+%F').log
                                         echo "It is possible to see some mount errors here." >> $PWD/logs/ACDControl-$(date '+%F').log
@@ -130,7 +132,8 @@ else
                                         acdcli umount
                                         sleep 3
 
-                                        echo "Syncing new upload changes with local cache" >> $PWD/logs/ACDControl-$(date '+%F').log
+                                        echo "Removing nodes.db & syncing new upload changes with local cache" >> $PWD/logs/ACDControl-$(date '+%F').log
+                                        rm -f /home/plex/.cache/acd_cli/nodes.db
                                         acdcli old-sync >> $PWD/logs/ACDControl-$(date '+%F').log
 
                                         sleep 5
