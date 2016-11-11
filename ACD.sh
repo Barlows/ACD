@@ -32,7 +32,7 @@ LOCALUNENCRYPTED='/home/plex/local'
 UNIONFOLDER='/home/plex/media/'
 
 ## ENCFS OPTIONS ##
-ENCFSKEY='Enter Pass Here'
+ENCFSKEY='Pass Here'
 ENCFSXML='/home/plex/encfs.xml'
 
 if [ "$1" == "Start" ]; then
