@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# https://github.com/sk8r776/ACD-Backed-Plex-Controller
 if [ -z "$1" ]; then
         echo "The script must tbe run with the following syntax: ./ACDControl.sh Start|Stop|Restart|Sync"
         echo "This script provides the following options to manage ACD backed plex:"
